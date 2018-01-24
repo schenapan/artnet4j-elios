@@ -84,9 +84,8 @@ public class ArtDmxPacket extends ArtNetPacket {
 	public boolean parse(byte[] raw) {
 		setData(raw);
 		sequenceID = data.getInt8(12);
-		int subnetUniverse = data.getInt8(14);
-		subnetID = subnetUniverse >> 4;
-		universeID = subnetUniverse & 0x0f;
+		subnetID = data.getInt8(14);
+		universeID = data.getInt8(15) >> 1;
 		numChannels = data.getInt16(16);
 		dmxData = data.getByteChunk(dmxData, 18, numChannels);
 		return true;
